@@ -13,7 +13,6 @@ function isValidFile(fileName) {
 function addAction(mod, actions) {
   for (var action in actions) {
     if (actions.hasOwnProperty(action)) {
-      puts("add action " + mod + "  " + action);
       actions[action].controllerName = mod;
       actions[action].actionName     = action;
     }

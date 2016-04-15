@@ -1,6 +1,7 @@
 'use strict';
 
-var version = require("../package.json").version;
+var path = require('path');
+var version = require(path.join(app.root, "package.json")).version;
 
 var config = {
   version: version,
