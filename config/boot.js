@@ -11,5 +11,5 @@ app.controller = function (controllerName) {
   //  controllerName += ".js";
   //}
   //return require(path.join(app.root, "app/controllers", controllerName));
-  eval("this.controllers." + controllerName);
+  return eval("app.controllers." + controllerName);
 };
