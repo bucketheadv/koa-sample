@@ -47,6 +47,6 @@ app = module.exports = http.createServer(app.callback());
 
 if (!module.parent) {
   app.listen(config.port);
-  console.log("$ open http://localhost:" + config.port);
+  console.log("$ koa server was started suceessful, to visit http://localhost:" + config.port);
 }
 
