@@ -10,16 +10,33 @@ function isValidFile(fileName) {
   return (fileName[0] === '.') ? false : true;
 }
 
-function addAction(mod, actions) {
+function addAction(mods, actions) {
   for (var action in actions) {
     if (actions.hasOwnProperty(action)) {
-      actions[action].controllerName = mod;
+      actions[action].controllerName = mods[mods.length - 1];
       actions[action].actionName     = action;
     }
   }
 
+  // namespace for controllers
+  var action = {};
+  var innerAction = action;
+  if(mods.length > 1) {
+    mods.slice(1).forEach(function(ele, idx) {
+      var ns = mods.slice(0, idx + 1);
+      if(idx === (mods.length - 2)) {
+        // the final element
+        innerAction[ele] = actions;
+      } else {
+        innerAction[ele] = {};
+      }
+      innerAction = innerAction[ele];
+    });
+    controllers[mods[0]] = action;
+  } else {
+    controllers[mods[mods.length - 1]] = actions;
+  }
   //_.extend(controllers[mod], actions);
-  controllers[mod] = actions;
 }
 
 function getBasename(fileName) {
@@ -30,15 +47,17 @@ function getBasename(fileName) {
   return (basename === '') ? false : basename
 }
 
-var readdirSync = function (controllersPath) { 
-  fs.readdirSync(controllersPath).filter(isValidFile).forEach(function(name) {
+var readdirSync = function (controllerPath) { 
+  fs.readdirSync(controllerPath).filter(isValidFile).forEach(function(name) {
     var basename = getBasename(name);
 
     if (!basename) return ;
-    var fileName = path.join(controllersPath, name);
+    var fileName = path.join(controllerPath, name);
 
     if (name.slice(-3) == '.js') {
-      addAction(basename, require(fileName));
+      var namespace = controllerPath.slice(controllersPath.length).split("/").filter(function(ele) { return (ele != undefined && ele.toString().trim() != '')});
+      namespace = namespace.concat(basename)
+      addAction(namespace, require(fileName));
     } else {
       readdirSync(fileName);
     }
