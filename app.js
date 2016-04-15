@@ -34,7 +34,7 @@ if (config.debug && process.env.NODE_ENV !== 'test') {
 /*
  * favicon
  */
-app.use(middlewares.favicon(path.join(app.root, "public/favicon.ico")));
+app.use(middlewares.favicon(__dirname + '/public/favicon.ico'));
 
 /*
  * router
@@ -47,6 +47,6 @@ app = module.exports = http.createServer(app.callback());
 
 if (!module.parent) {
   app.listen(config.port);
-  console.log("$ koa server was started suceessful, to visit http://localhost:" + config.port);
+  console.log("koa server was started suceessfully, to visit http://0.0.0.0:" + config.port);
 }
 
