@@ -3,6 +3,7 @@
 var koa    = require('koa');
 var app    = koa();
 global.app = module.exports = app;
+global.db  = require('./app/models/index');
 
 var boot   = require("./config/boot");
 var middlewares = require('koa-middlewares');
