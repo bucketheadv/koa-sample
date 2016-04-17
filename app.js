@@ -11,7 +11,7 @@ var config = require('./config/settings');
 var path   = require('path');
 var http   = require('http');
 var notFound = require('./config/404');
-var routes = require('./config/routes');
+require('./config/routes');
 
 // ignore favicon
 // app.use(middlewares.favicon());
@@ -42,7 +42,6 @@ app.use(middlewares.favicon(__dirname + '/public/favicon.ico'));
  */
 app.use(middlewares.router(app));
 // app.use(routes.routes());
-routes(app);
 
 app = module.exports = http.createServer(app.callback());
 

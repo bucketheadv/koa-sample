@@ -5,11 +5,11 @@
   "main": "app.js",
   "dependencies": {
     "koa": "~0.19.1",
+    "koa-ejs": "",
     "sequelize": "",
     "sequelize-cli": "",
     "mysql": "",
     "co-views": "",
-    "ejs": "",
     "koa-middlewares": "~2.1.0",
     "levelup": "~0.19.0",
     "memdown": "~1.1.1",

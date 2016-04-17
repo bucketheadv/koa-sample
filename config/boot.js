@@ -4,7 +4,8 @@ var views = require("co-views");
 
 app.root = path.join(__dirname, "..");
 
-app.render = views(path.join(app.root, 'app/views'), { ext: 'ejs'});
+//app.render = views(path.join(app.root, 'app/views'), { ext: 'ejs'});
+require('./initializer/render');
 app.controllers = require(path.join(app.root, "./config/initializer/controllers"));
 app.controller = function (controllerName) {
   //if (controllerName.slice(-3) != '.js') {
